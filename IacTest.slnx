@@ -12,25 +12,22 @@
     <Project Path="AzureFunctionTest/AzureFunctionTest.csproj" Id="a4c8dfcc-f82a-40aa-bbf3-ce472c8540ff" />
   </Folder>
   <Folder Name="/Infrastructure/">
+    <File Path=".github/workflows/ci-cd.yml" />
     <File Path="infrastructure/Dockerfile" />
   </Folder>
   <Folder Name="/Infrastructure/bootstrap/">
     <File Path="infrastructure/bootstrap/main.tf" />
-    <File Path="infrastructure/bootstrap/outputs.tf" />
     <File Path="infrastructure/bootstrap/variables.tf" />
-    <File Path="infrastructure/bootstrap/versions.tf" />
   </Folder>
   <Folder Name="/Infrastructure/live/">
-    <File Path="infrastructure/live/backend.tf" />
-    <File Path="infrastructure/live/container_apps.tf" />
-    <File Path="infrastructure/live/dev.tfvars" />
-    <File Path="infrastructure/live/locals.tf" />
-    <File Path="infrastructure/live/log_analytics.tf" />
-    <File Path="infrastructure/live/outputs.tf" />
-    <File Path="infrastructure/live/providers.tf" />
-    <File Path="infrastructure/live/resource_group.tf" />
-    <File Path="infrastructure/live/variables.tf" />
-    <File Path="infrastructure/live/versions.tf" />
+    <File Path="infrastructure/live/main.tf" />
   </Folder>
-  <Folder Name="/Solution Items/" />
+  <Folder Name="/Infrastructure/live/environments/">
+    <File Path="infrastructure/live/environments/dev.tfvars" />
+    <File Path="infrastructure/live/environments/prod.tfvars" />
+    <File Path="infrastructure/live/environments/qa.tfvars" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
 </Solution>

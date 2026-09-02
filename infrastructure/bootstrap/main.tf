@@ -1,3 +1,22 @@
+terraform {
+  required_version = ">= 1.9.0"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
 resource "azurerm_resource_group" "tfstate" {
   name     = "rg-${var.project}-tfstate"
   location = var.location
@@ -41,4 +60,19 @@ resource "azurerm_storage_container" "tfstate" {
   name                  = "tfstate"
   storage_account_id    = azurerm_storage_account.tfstate.id
   container_access_type = "private"
+}
+
+output "resource_group_name" {
+  description = "Resource group que contiene el storage account del tfstate."
+  value       = azurerm_resource_group.tfstate.name
+}
+
+output "storage_account_name" {
+  description = "Storage account a usar en el backend azurerm de infra/live."
+  value       = azurerm_storage_account.tfstate.name
+}
+
+output "container_name" {
+  description = "Blob container a usar en el backend azurerm de infra/live."
+  value       = azurerm_storage_container.tfstate.name
 }
