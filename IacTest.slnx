@@ -1,0 +1,36 @@
+<Solution>
+  <Folder Name="/AzureFunction.Business/">
+    <Project Path="AzureFunction.Business/AzureFunction.Business.csproj" Id="e8520405-149f-4ce1-a0c2-b2c397b2702c" />
+  </Folder>
+  <Folder Name="/AzureFunction.DataAccess/">
+    <Project Path="AzureFunction.DataAccess/AzureFunction.DataAccess.csproj" Id="e3fcc657-ae2d-4949-b5f7-330fc2df0cb6" />
+  </Folder>
+  <Folder Name="/AzureFunction.Domain/">
+    <Project Path="AzureFunction.Domain/AzureFunction.Domain.csproj" Id="9b68af05-c8bf-4127-b809-d41980e982a7" />
+  </Folder>
+  <Folder Name="/AzureFunction/">
+    <Project Path="AzureFunctionTest/AzureFunctionTest.csproj" Id="a4c8dfcc-f82a-40aa-bbf3-ce472c8540ff" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <File Path="infrastructure/Dockerfile" />
+  </Folder>
+  <Folder Name="/Infrastructure/bootstrap/">
+    <File Path="infrastructure/bootstrap/main.tf" />
+    <File Path="infrastructure/bootstrap/outputs.tf" />
+    <File Path="infrastructure/bootstrap/variables.tf" />
+    <File Path="infrastructure/bootstrap/versions.tf" />
+  </Folder>
+  <Folder Name="/Infrastructure/live/">
+    <File Path="infrastructure/live/backend.tf" />
+    <File Path="infrastructure/live/container_apps.tf" />
+    <File Path="infrastructure/live/dev.tfvars" />
+    <File Path="infrastructure/live/locals.tf" />
+    <File Path="infrastructure/live/log_analytics.tf" />
+    <File Path="infrastructure/live/outputs.tf" />
+    <File Path="infrastructure/live/providers.tf" />
+    <File Path="infrastructure/live/resource_group.tf" />
+    <File Path="infrastructure/live/variables.tf" />
+    <File Path="infrastructure/live/versions.tf" />
+  </Folder>
+  <Folder Name="/Solution Items/" />
+</Solution>
