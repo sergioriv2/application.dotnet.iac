@@ -16,6 +16,7 @@ if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPLICATIONINSIGHT
         .UseAzureMonitorExporter();
 }
 
+// DI for all layers
 Register.RegisterServices(builder.Services);
 
 builder.Build().Run();
