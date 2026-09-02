@@ -209,6 +209,24 @@ En el repo → **Settings → Secrets and variables → Actions → New reposito
 - **PR a `main`** → job `terraform-plan`: `fmt` + `validate` + `plan` (solo lectura).
 - **Push a `main`** (ej. al mergear un PR) → `terraform-apply` (aplica infra) → `deploy-function` (build + publish de `AzureFunctionTest` al Function App), encadenados.
 
+Todo el workflow corre bajo un único `concurrency.group` (`terraform-live`) porque `terraform-plan` y `terraform-apply` comparten el mismo backend/state — así los runs se encolan en vez de pelear por el lock del state.
+
+### Troubleshooting: `Error message: state blob is already locked`
+
+Terraform usa un *blob lease* de Azure Storage como lock del state. Pasa cuando dos runs intentan tocar el mismo state a la vez, o cuando un run anterior murió a mitad de camino (runner caído, cancelado manualmente) y no llegó a liberar el lease.
+
+1. Mirá el log completo del job fallido — el error trae un bloque `Lock Info:` con el `ID`, quién lo tomó (`Who`) y cuándo (`Created`).
+2. Confirmá en la pestaña **Actions** que no haya otro run de este workflow corriendo ahora mismo (con el `concurrency` group de arriba, esto no debería pasar de nuevo — pero si el lock quedó de *antes* de agregarlo, sigue colgado y hay que liberarlo a mano).
+3. Si no hay nada corriendo, liberá el lock con el `ID` del paso 1:
+
+   ```bash
+   cd infrastructure/live
+   terraform init -input=false
+   terraform force-unlock <LOCK_ID>
+   ```
+
+   > 🖥️ **Alternativa por Portal** (si no querés/podés correr Terraform local): **Storage accounts → `<tfstate-storage-account>` → Containers → `tfstate` → click en el blob `iactest.dev.tfstate` → Break lease**.
+
 ## 8. Deploy manual (sin pipeline)
 
 Si querés probar sin pasar por GitHub Actions:
