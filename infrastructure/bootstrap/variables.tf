@@ -13,5 +13,5 @@ variable "environment" {
 variable "location" {
   description = "Región de Azure donde se crea el Storage Account del tfstate."
   type        = string
-  default     = "brazilsouth"
+  default     = "eastus2"
 }

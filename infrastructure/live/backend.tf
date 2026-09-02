@@ -4,9 +4,10 @@
 # después de aplicar infra/bootstrap.
 terraform {
   backend "azurerm" {
-    resource_group_name = "rg-iactest-tfstate"
+    resource_group_name  = "rg-iactest-tfstate"
     storage_account_name = "stiactesttfstate286712"
     container_name        = "tfstate"
     key                    = "iactest.dev.tfstate"
+    use_azuread_auth       = true
   }
 }
