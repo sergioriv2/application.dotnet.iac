@@ -22,6 +22,15 @@ permissions:
   id-token: write
   contents: read
 
+# terraform-plan y terraform-apply comparten el mismo backend/state (infrastructure/live
+# -> iactest.dev.tfstate). Sin esto, dos runs simultáneos (ej. dos pushes seguidos a un PR)
+# pelean por el blob lease y uno falla con "state blob is already locked". cancel-in-progress
+# queda en false a propósito: cancelar un run a mitad de un `apply` puede dejar el lock
+# colgado igual, así que preferimos encolar en vez de cortar.
+concurrency:
+  group: terraform-live
+  cancel-in-progress: false
+
 env:
   TF_DIR: infrastructure/live
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
